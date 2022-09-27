@@ -5,7 +5,7 @@ module.exports = {
   entry: "./src/client/index.tsx",
   output: {
     filename: "bundle.js",
-    path: path.resolve(__dirname, "bundle"),
+    path: path.resolve(__dirname, "public"),
   },
   performance: {
     hints: false,
@@ -87,8 +87,13 @@ module.exports = {
       "/**": {
         target: "http://localhost:3000/",
         secure: false,
-        changeOrigin: true,
+        // changeOrigin: true,
       },
+      // "*": {
+      //   target: "http://localhost:3000/",
+      //   secure: false,
+      //   changeOrigin: true,
+      // },
     },
   },
 };
