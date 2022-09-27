@@ -1,5 +1,5 @@
 import React from "react";
-import store from "./redux/store";
+import { store } from "./Index";
 
 const App = () => {
   return <h1>hello world</h1>;
