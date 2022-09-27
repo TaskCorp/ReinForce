@@ -5,7 +5,7 @@ module.exports = {
   entry: "./src/client/index.tsx",
   output: {
     filename: "bundle.js",
-    path: path.resolve(__dirname, "public"),
+    path: path.resolve(__dirname, "bundle"),
   },
   performance: {
     hints: false,
