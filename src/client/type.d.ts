@@ -1,13 +1,13 @@
 //* When a new task is created it should be this shape.
 interface NewTask {
-  _id: number;
-  user_id: number;
-  taskName: string;
-  startTime: number;
-  revisit: number;
-}
-// username name start_time revisit_interval
-/*
+    _id?: number,
+    user_id?: number,
+    taskName: string
+    startTime: number
+    revisit: number
+  }
+  // username name start_time revisit_interval
+  /*
   let queryString =
     `SELECT "users_id", "name", "start_time", "revisit_interval" FROM users INNER JOIN tasks on tasks.users_id = users._id WHERE username = '${username}'; `;
 

@@ -73,3 +73,22 @@ body {
 #PostTask {
   padding: 20px;
 }
+
+
+
+
+#title {
+  display: flexbox;
+  justify-content:flex-start;
+  align-items:flex-start;
+  padding: 1rem;
+  margin: 0.5rem;
+  border: 0.5em solid lightblue;
+  border-radius: 5px;
+}
+
+#add-button {
+  display: flexbox;
+  padding: 1rem;
+  margin: 0.5rem;
+}
