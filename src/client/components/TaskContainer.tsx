@@ -10,12 +10,73 @@ import React from "react";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import Tasks from "./Tasks";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { Dispatch } from "redux";
+import * as actionCreators from "../redux/actionCreators";
 
 function TaskContainer() {
+  const tasks: readonly ReadTask[] = useSelector(
+    (state: TaskState) => state.tasks,
+    shallowEqual,
+  );
+
+  // console.log("TASKS IN REACT", tasks);
+
+  const dispatch: Dispatch<any> = useDispatch();
+
+  const postTask = React.useCallback(
+    (task: ReadTask): any => dispatch(actionCreators.postTask(task)),
+    [dispatch],
+  );
+  const getTasks = React.useCallback(
+    (tasks: ReadTask[]): any => dispatch(actionCreators.getTasks(tasks)),
+    [dispatch],
+  );
+  const updateTask = React.useCallback(
+    (task: ReadTask): any => dispatch(actionCreators.updateTask(task)),
+    [dispatch],
+  );
+  const deleteTask = React.useCallback(
+    (task: ReadTask): any => dispatch(actionCreators.deleteTask(task)),
+    [dispatch],
+  );
+
+  React.useEffect(() => {
+    // fetch()
+    async function helper() {
+      // console.log("INSIDE HELPER");
+      try {
+        const getOptions = {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
+
+        const response = await fetch("/api/getTask", getOptions);
+        const data = await response.json();
+
+        // console.log("BEFORE GET TASKS");
+        getTasks(data);
+
+        // console.log("TASKS AFTER USE EFFECT", tasks);
+      } catch (err) {
+        console.log("getTasks error");
+      }
+    }
+    helper();
+    // invoke getTasks dispatch
+  }, []);
+
   return (
     <div id="TaskContainer">
       <NavBar />
-      <Tasks />
+      <Tasks
+        tasks={tasks}
+        postTask={postTask}
+        updateTask={updateTask}
+        deleteTask={deleteTask}
+      />
       <Footer />
     </div>
   );
