@@ -7,7 +7,7 @@
     "allowJs": true,
     "jsx": "react-jsx",
     "sourceMap": true,
-    "outDir": "dist",
+    "outDir": "bundle",
     "strict": true,
     "esModuleInterop": true,
     "noImplicitAny": true,
@@ -16,5 +16,8 @@
     "forceConsistentCasingInFileNames": true,
     "watch": true
   },
-  "exclude": ["node_modules", "dist"]
+  "exclude": ["node_modules", "bundle"]
 }
+
+
+//changed dist to bundle
