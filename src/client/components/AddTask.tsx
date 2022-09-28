@@ -47,7 +47,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
             autoComplete="off"
             >
         <TextField id="outlined-basic" label="New Task" variant="outlined" />
-        <TextField id="outlined-basic2" label="Value" variant="outlined" />
+        <TextField type="number" id="outlined-basic2" label="Value" variant="outlined" />
         <InputLabel id="input-label">Time</InputLabel>
         <Select
             labelId="select-label"

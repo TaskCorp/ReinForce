@@ -1,7 +1,7 @@
 //* When a new task is created it should be this shape.
 interface NewTask {
-    _id: number,
-    user_id: number,
+    _id?: number,
+    user_id?: number,
     taskName: string
     startTime: number
     revisit: number
