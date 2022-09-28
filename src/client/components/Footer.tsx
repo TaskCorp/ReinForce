@@ -13,6 +13,7 @@ export default function Footer() {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
+            <h1>hello world</h1>
             {
               /* <IconButton
             size="large"

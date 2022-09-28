@@ -6,11 +6,47 @@
  */
 
 import React from "react";
+import Task from "./Task";
+import { PostTask } from "./AddTask";
+
+/*
+"_id" SERIAL NOT NULL,
+  "name" VARCHAR(50),
+	"start_time" BIGINT,
+  "revisit_interval" BIGINT,
+  "users_id" BIGINT NOT NULL,
+
+*/
 
 function Tasks() {
+  const testData = [
+    {
+      _id: 1,
+      name: "play piano",
+      startTime: 1664353489411,
+      revisit: 50000,
+      users_id: 1,
+    },
+    {
+      _id: 2,
+      name: "play guitar",
+      startTime: 166435348352,
+      revisit: 50000,
+      users_id: 1,
+    },
+  ];
+
+  const tasks = testData.map((task) => {
+    return <Task />;
+  });
+
   return (
     <div id="Tasks">
-      <h1>hello world</h1>
+      <div id="PostTask">
+        <PostTask saveTask={Task} />
+      </div>
+      {/* <h1>hello world</h1> */}
+      {tasks}
     </div>
   );
 }

@@ -30,7 +30,7 @@ body {
   width: 100vw;
   height: 100vh;
 
-  background-color: greenyellow;
+  // background-color: greenyellow;
 
   display: flex;
   flex-direction: column;
@@ -60,3 +60,16 @@ body {
 }
 
 // #Footer {}
+
+#Task {
+  display: flex;
+  justify-content: center;
+
+  border: 2px solid green;
+  width: 70vw;
+  padding: 5px;
+}
+
+#PostTask {
+  padding: 20px;
+}

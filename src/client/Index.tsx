@@ -9,7 +9,7 @@ import App from "./App";
 import reducer from "./redux/Reducers";
 
 import { PostTask } from "./components/AddTask";
-import Task from "./components/Tasks";
+import Tasks from "./components/Tasks";
 
 const rootElement: HTMLElement | null = document.getElementById("root");
 
@@ -24,7 +24,7 @@ const root: Root = createRoot(rootElement);
 root.render(
   <Provider store={store}>
     <App />
-    {/* <PostTask saveTask={Task}/> */}
+    {/* <PostTask saveTask={Tasks}/> */}
   </Provider>,
 );
 
