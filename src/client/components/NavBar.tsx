@@ -20,13 +20,13 @@ export default function NavBar() {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-          <ListAltIcon />
+            <ListAltIcon />
             {/* <MenuIcon /> */}
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             ReinForce
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit">Logout</Button>
         </Toolbar>
       </AppBar>
     </Box>

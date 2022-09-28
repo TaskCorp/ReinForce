@@ -6,18 +6,18 @@
  ** (3) - Footer
  */
 
-import React from "react";
-import NavBar from "./NavBar";
-import Footer from "./Footer";
-import Tasks from "./Tasks";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "redux";
-import * as actionCreators from "../redux/actionCreators";
+import React from 'react';
+import NavBar from './NavBar';
+import Footer from './Footer';
+import Tasks from './Tasks';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
+import * as actionCreators from '../redux/actionCreators';
 
 function TaskContainer() {
   const tasks: readonly ReadTask[] = useSelector(
     (state: TaskState) => state.tasks,
-    shallowEqual,
+    shallowEqual
   );
 
   // console.log("TASKS IN REACT", tasks);
@@ -26,19 +26,19 @@ function TaskContainer() {
 
   const postTask = React.useCallback(
     (task: ReadTask): any => dispatch(actionCreators.postTask(task)),
-    [dispatch],
+    [dispatch]
   );
   const getTasks = React.useCallback(
     (tasks: ReadTask[]): any => dispatch(actionCreators.getTasks(tasks)),
-    [dispatch],
+    [dispatch]
   );
   const updateTask = React.useCallback(
     (task: ReadTask): any => dispatch(actionCreators.updateTask(task)),
-    [dispatch],
+    [dispatch]
   );
   const deleteTask = React.useCallback(
     (task: ReadTask): any => dispatch(actionCreators.deleteTask(task)),
-    [dispatch],
+    [dispatch]
   );
 
   React.useEffect(() => {
@@ -47,13 +47,13 @@ function TaskContainer() {
       // console.log("INSIDE HELPER");
       try {
         const getOptions = {
-          method: "GET",
+          method: 'GET',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
         };
 
-        const response = await fetch("/api/getTask", getOptions);
+        const response = await fetch('/api/getTask', getOptions);
         const data = await response.json();
 
         // console.log("BEFORE GET TASKS");
@@ -61,7 +61,7 @@ function TaskContainer() {
 
         // console.log("TASKS AFTER USE EFFECT", tasks);
       } catch (err) {
-        console.log("getTasks error");
+        console.log('getTasks error');
       }
     }
     helper();
@@ -76,6 +76,7 @@ function TaskContainer() {
         postTask={postTask}
         updateTask={updateTask}
         deleteTask={deleteTask}
+        getTasks={getTasks}
       />
       <Footer />
     </div>

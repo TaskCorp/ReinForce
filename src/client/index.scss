@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;200;400;500&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 * {
   margin: 0;
@@ -54,9 +55,12 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80vw;
-  border: 2px solid red;
+  // border: 2px solid red;
+  width: 100vw;
+
   padding: 10px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 // #Footer {}
@@ -72,15 +76,17 @@ body {
 
 #PostTask {
   padding: 20px;
+  // background-color: greenyellow;
+  // position: absolute;
+  // width: 70vw;
 }
-
-
-
 
 #title {
   display: flexbox;
-  justify-content:flex-start;
-  align-items:flex-start;
+  // justify-content: flex-start;
+  // align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   padding: 1rem;
   margin: 0.5rem;
   border: 0.5em solid lightblue;
@@ -91,4 +97,25 @@ body {
   display: flexbox;
   padding: 1rem;
   margin: 0.5rem;
+}
+
+#TaskList {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+
+  // border: 2px solid red;
+
+  > div {
+    align-self: center;
+    justify-self: center;
+    // justify-items: center;
+    width: 70vw;
+  }
+}
+
+#add-button {
+  width: 3rem;
 }
