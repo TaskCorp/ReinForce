@@ -1,6 +1,6 @@
-const { query } = require("express");
-import { NextFunction, Request, Response, response } from "express";
-const db = require("../models/db.ts");
+const { query } = require('express');
+import { NextFunction, Request, Response, response } from 'express';
+const db = require('../models/db.ts');
 
 const apiController: any = {};
 
@@ -21,7 +21,7 @@ apiController.getTask = (req: Request, res: Response, next: NextFunction) => {
     })
     .catch((err: string) =>
       next({
-        log: "apiController.getTask went wrong",
+        log: 'apiController.getTask went wrong',
         message: { err: `Error ${JSON.stringify(err)}` },
       })
     );
@@ -37,8 +37,7 @@ apiController.postTask = (req: any, res: Response, next: NextFunction) => {
 
   // let queryString =
   //   `INSERT INTO public.tasks ("name", "start_time", "revisit_interval", "users_id") VALUES('${taskName}', ${startTime}, ${revisit}, ${users_id}); SELECT "users_id", "name", "start_time", "revisit_interval" FROM users INNER JOIN tasks on tasks.users_id = users._id WHERE username = '${username}'; `;
-  let queryString =
-    `INSERT INTO public.tasks ("name", "start_time", "revisit_interval", "users_id") VALUES('${taskName}', ${startTime}, ${revisit}, ${users_id}); SELECT * FROM public.tasks ORDER BY _id ASC; `;
+  let queryString = `INSERT INTO public.tasks ("name", "start_time", "revisit_interval", "users_id") VALUES('${taskName}', ${startTime}, ${revisit}, ${users_id}); SELECT * FROM public.tasks ORDER BY _id ASC; `;
 
   db.query(queryString)
     .then((response: any) => {
@@ -47,7 +46,7 @@ apiController.postTask = (req: any, res: Response, next: NextFunction) => {
     })
     .catch((err: string) =>
       next({
-        log: "apiController.postTask went wrong",
+        log: 'apiController.postTask went wrong',
         message: { err: `Error ${JSON.stringify(err)}` },
       })
     );
@@ -59,7 +58,7 @@ apiController.postTask = (req: any, res: Response, next: NextFunction) => {
 apiController.updateTask = (
   req: Request,
   res: Response,
-  next: NextFunction,
+  next: NextFunction
 ) => {
   // body
   const { _id, taskName, startTime, revisit } = req.body;
@@ -82,8 +81,7 @@ UPDATE public.tasks SET name = 'flying6000',
 start_time = 723423, revisit_interval = 12312
 WHERE _id = 14; select * from public.tasks ORDER BY _id ASC;
   */
-  let queryString =
-    `UPDATE public.tasks SET name = '${taskName}', start_time = ${startTime}, revisit_interval = ${revisit} WHERE _id = ${_id}; SELECT * FROM public.tasks ORDER BY _id ASC; `;
+  let queryString = `UPDATE public.tasks SET name = '${taskName}', start_time = ${startTime}, revisit_interval = ${revisit} WHERE _id = ${_id}; SELECT * FROM public.tasks ORDER BY _id ASC; `;
 
   db.query(queryString)
     .then((response: any) => {
@@ -94,7 +92,7 @@ WHERE _id = 14; select * from public.tasks ORDER BY _id ASC;
     })
     .catch((err: string) => {
       next({
-        log: "apiController.updateTask went wrong",
+        log: 'apiController.updateTask went wrong',
         message: { err: `Error ${JSON.stringify(err)}` },
       });
     });
@@ -103,10 +101,11 @@ WHERE _id = 14; select * from public.tasks ORDER BY _id ASC;
 apiController.deleteTask = (
   req: Request,
   res: Response,
-  next: NextFunction,
+  next: NextFunction
 ) => {
   // // params
   const { _id } = req.params;
+  console.log('_ID', _id);
 
   // let queryString =
   //   `DELETE FROM public.tasks WHERE _id = ${_id}; SELECT "users_id", "name", "start_time", "revisit_interval" FROM users INNER JOIN tasks on tasks.users_id = users._id WHERE username = '${username}'; `;
@@ -119,7 +118,7 @@ apiController.deleteTask = (
     })
     .catch((err: string) =>
       next({
-        log: "apiController.deleteTask went wrong",
+        log: 'apiController.deleteTask went wrong',
         message: { err: `Error ${JSON.stringify(err)}` },
       })
     );

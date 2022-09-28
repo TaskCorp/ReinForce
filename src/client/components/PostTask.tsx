@@ -10,7 +10,9 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { IconButton } from '@mui/material';
 import Icon from '@mui/material/Icon';
+import AddIcon from '@mui/icons-material/Add';
 import { green } from '@mui/material/colors';
 
 type Props = {
@@ -30,8 +32,33 @@ export const PostTask: React.FC<Props> = ({ saveTask }) => {
     e.preventDefault();
     saveTask(task);
   };
+
   const handleChange = (event: SelectChangeEvent) => {
     setDay(event.target.value as string);
+  };
+
+  const handlePost = async () => {
+    try {
+      // if (!document) return;
+
+      const rootElement: HTMLElement | null =
+        document.getElementById('outlined-basic');
+
+      if (!rootElement) throw new Error('Fail to get root element in index.ts');
+      // const doc = document;
+
+      const name = rootElement.nodeValue;
+
+      console.log('name', name);
+      console.log(rootElement.nodeValue);
+
+      // const name: Element | null = document.querySelector('#outlined-basic').nodeValue;
+      const startTime = Date.now();
+
+      console.log(name);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -71,6 +98,9 @@ export const PostTask: React.FC<Props> = ({ saveTask }) => {
           <MenuItem value={365}>Year(s)</MenuItem>
         </Select>
       </FormControl>
+      <IconButton onClick={() => handlePost()} color="primary">
+        <AddIcon fontSize="large" />
+      </IconButton>
     </Box>
   );
 };

@@ -1,4 +1,4 @@
-import * as actionTypes from "./Actions";
+import * as actionTypes from './Actions';
 
 // export function postTask(task: ReadTask) {
 //   const action: TaskAction = {
@@ -16,6 +16,7 @@ export function postTask(task: ReadTask) {
 }
 
 export function deleteTask(task: ReadTask) {
+  console.log('delete task invoked', task);
   const action: TaskAction = {
     type: actionTypes.DELETE_TASK,
     task,
@@ -32,7 +33,8 @@ export function updateTask(task: ReadTask) {
 }
 
 export function getTasks(tasks: ReadTask[]) {
-  // console.log("ACTION CREATOR INVOKED");
+  console.log('ACTION CREATOR INVOKED');
+  console.log('TASKS', tasks);
   const action: TasksAction = {
     type: actionTypes.GET_TASKS,
     task: tasks,

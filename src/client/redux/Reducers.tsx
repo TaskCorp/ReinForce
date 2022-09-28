@@ -1,4 +1,4 @@
-import * as actionTypes from "./Actions";
+import * as actionTypes from './Actions';
 
 const initalState: TaskState = {
   // tasks: [{
@@ -13,7 +13,7 @@ const initalState: TaskState = {
 
 const reducer = (
   state: TaskState = initalState,
-  action: TaskAction,
+  action: TaskAction
 ): TaskState => {
   switch (action.type) {
     case actionTypes.POST_TASK:
@@ -54,14 +54,14 @@ const reducer = (
 
           // if (!action.task) return false;
           // return task.taskName !== action.task.taskName;
-        },
+        }
       );
       return {
         ...state,
         tasks: delTask,
       };
 
-      //* Finish up UPDATE_TASKS
+    //* Finish up UPDATE_TASKS
 
     case actionTypes.UPDATE_TASK:
       const tasksArray: ReadTask[] = state.tasks.slice();
@@ -91,13 +91,13 @@ const reducer = (
         tasks: tasksArray,
       };
 
-      //* Finish up the GET_TASKS reducer
+    //* Finish up the GET_TASKS reducer
 
     case actionTypes.GET_TASKS:
       // console.log('reducer invoked')
       const newTasks: ReadTask[] | any = action.task;
       const newState = { ...state, tasks: newTasks };
-      //   console.log("NEW STATE", newState);
+      console.log('NEW STATE', newState);
       return newState;
     default: {
       return state;

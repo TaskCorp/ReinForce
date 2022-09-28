@@ -5,9 +5,9 @@
  * ? (3) - If there is time add tomato component before interval counter on left.
  */
 
-import React from "react";
-import Task from "./Task";
-import { PostTask } from "./AddTask";
+import React from 'react';
+import Task from './Task';
+import { PostTask } from './PostTask';
 
 /*
 "_id" SERIAL NOT NULL,
@@ -18,9 +18,13 @@ import { PostTask } from "./AddTask";
 
 */
 
-function Tasks(
-  { tasks: stateTasks, updateTask, deleteTask, postTask }: TasksProps,
-) {
+function Tasks({
+  tasks: stateTasks,
+  updateTask,
+  deleteTask,
+  postTask,
+  getTasks,
+}: TasksProps) {
   // const testData = [
   //   {
   //     _id: 1,
@@ -37,7 +41,7 @@ function Tasks(
   //     users_id: 1,
   //   },
   // ];
-
+  console.log('STATE TASKS', stateTasks);
   const tasks = stateTasks.map((task, index) => {
     // console.log('TASK', task);
 
@@ -49,6 +53,7 @@ function Tasks(
         name={task.name}
         start_time={task.start_time}
         revisit_interval={task.revisit_interval}
+        getTasks={getTasks}
         updateTask={updateTask}
         deleteTask={deleteTask}
         postTask={postTask}
@@ -62,7 +67,9 @@ function Tasks(
         <PostTask saveTask={Task} />
       </div>
       {/* <h1>hello world</h1> */}
-      {tasks}
+      <div id="TaskList">
+        <div>{tasks}</div>
+      </div>
     </div>
   );
 }

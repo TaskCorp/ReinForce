@@ -1,19 +1,19 @@
-import * as React from "react";
-import { createRoot, Root } from "react-dom/client";
+import * as React from 'react';
+import { createRoot, Root } from 'react-dom/client';
 //! Change to configureStore, not createStore
-import { applyMiddleware, createStore, Store } from "redux";
-import { Provider } from "react-redux";
-import thunk from "redux-thunk";
+import { applyMiddleware, createStore, Store } from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 
-import App from "./App";
-import reducer from "./redux/Reducers";
+import App from './App';
+import reducer from './redux/Reducers';
 
-import { PostTask } from "./components/AddTask";
-import Tasks from "./components/Tasks";
+import { PostTask } from './components/PostTask';
+import Tasks from './components/Tasks';
 
-const rootElement: HTMLElement | null = document.getElementById("root");
+const rootElement: HTMLElement | null = document.getElementById('root');
 
-if (!rootElement) throw new Error("Fail to get root element in index.ts");
+if (!rootElement) throw new Error('Fail to get root element in index.ts');
 
 export const store: Store<TaskState, TaskAction> & {
   dispatch: DispatchType;
@@ -25,7 +25,7 @@ root.render(
   <Provider store={store}>
     <App />
     {/* <PostTask saveTask={Tasks}/> */}
-  </Provider>,
+  </Provider>
 );
 
 // import * as React from "react"
