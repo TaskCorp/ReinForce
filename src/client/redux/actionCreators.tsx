@@ -33,8 +33,8 @@ export function getTasks() {
   return simulateHttpRequest(action)
 }
 
-// export const UPDATE_TASK = "UPDATE_TASK";
-// export const GET_TASK = "GET_TASK";
+
+//* Create the actual fetch requests
 export function simulateHttpRequest(action: TaskAction) {
   return (dispatch: DispatchType) => {
     setTimeout(() => {

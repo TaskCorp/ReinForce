@@ -1,11 +1,15 @@
 import * as React from 'react'
 import { createRoot, Root } from 'react-dom/client';
+//! Change to configureStore, not createStore
 import { createStore, applyMiddleware, Store } from "redux"
 import { Provider } from "react-redux"
 import thunk from "redux-thunk"
 
 import App from './App';
 import reducer from "./redux/Reducers";
+
+import { PostTask } from './components/AddTask'
+import Task from './components/Task';
 
 const rootElement: HTMLElement | null = document.getElementById('root');
 
@@ -21,7 +25,8 @@ const root: Root = createRoot(rootElement);
 
 root.render(
   <Provider store={store}>
-    <App />
+    {/* <App /> */}
+    <PostTask saveTask={Task}/>
   </Provider>
 );
 
