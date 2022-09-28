@@ -1,9 +1,15 @@
 import React from "react";
 
-function Task() {
+function Task(
+  { _id, users_id, name, start_time, revisit_interval }: TaskProps,
+) {
   return (
     <div id="Task">
-      <h1>this is a task</h1>
+      <p>{_id}</p>
+      <p>{users_id}</p>
+      <p>{name}</p>
+      <p>{start_time}</p>
+      <p>{revisit_interval}</p>
     </div>
   );
 }

@@ -18,26 +18,39 @@ import { PostTask } from "./AddTask";
 
 */
 
-function Tasks() {
-  const testData = [
-    {
-      _id: 1,
-      name: "play piano",
-      startTime: 1664353489411,
-      revisit: 50000,
-      users_id: 1,
-    },
-    {
-      _id: 2,
-      name: "play guitar",
-      startTime: 166435348352,
-      revisit: 50000,
-      users_id: 1,
-    },
-  ];
+function Tasks(
+  { tasks: stateTasks, updateTask, deleteTask, postTask }: TasksProps,
+) {
+  // const testData = [
+  //   {
+  //     _id: 1,
+  //     name: "play piano",
+  //     startTime: 1664353489411,
+  //     revisit: 50000,
+  //     users_id: 1,
+  //   },
+  //   {
+  //     _id: 2,
+  //     name: "play guitar",
+  //     startTime: 166435348352,
+  //     revisit: 50000,
+  //     users_id: 1,
+  //   },
+  // ];
 
-  const tasks = testData.map((task) => {
-    return <Task />;
+  const tasks = stateTasks.map((task, index) => {
+    // console.log('TASK', task);
+
+    return (
+      <Task
+        key={index}
+        _id={task._id}
+        users_id={task.users_id}
+        name={task.name}
+        start_time={task.start_time}
+        revisit_interval={task.revisit_interval}
+      />
+    );
   });
 
   return (
