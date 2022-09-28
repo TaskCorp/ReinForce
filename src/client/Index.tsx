@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { createRoot, Root } from 'react-dom/client';
+//! Change to configureStore, not createStore
 import { createStore, applyMiddleware, Store } from "redux"
 import { Provider } from "react-redux"
 import thunk from "redux-thunk"

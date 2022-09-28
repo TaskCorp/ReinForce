@@ -1,6 +1,7 @@
 //* When a new task is created it should be this shape.
 interface NewTask {
-    // username: string
+    _id: number,
+    user_id: number,
     taskName: string
     startTime: number
     revisit: number
@@ -15,9 +16,10 @@ interface NewTask {
     INNER JOIN tasks on tasks.users_id = users._id 
     WHERE username = 'pleb';
   */
-//* When we receive a taks back from the database, it should be of this shape.
+//* When we receive a task back from the database, it should be of this shape.
   interface ReadTask {
-    // id: string
+    _id: number,
+    user_id: number,
     taskName: string
     startTime: number
     revisit: number
