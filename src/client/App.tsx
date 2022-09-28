@@ -2,7 +2,7 @@ import React from "react";
 import { store } from "./Index";
 
 const App = () => {
-  return <h1>hello world</h1>;
+  return;
 };
 
 // export default App;
