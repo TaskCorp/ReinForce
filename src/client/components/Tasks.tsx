@@ -49,6 +49,9 @@ function Tasks(
         name={task.name}
         start_time={task.start_time}
         revisit_interval={task.revisit_interval}
+        updateTask={updateTask}
+        deleteTask={deleteTask}
+        postTask={postTask}
       />
     );
   });

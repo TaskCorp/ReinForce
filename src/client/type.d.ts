@@ -65,6 +65,9 @@ type TaskProps = {
   name: string;
   start_time: number;
   revisit_interval: number;
+  updateTask: Function,
+  deleteTask: Function,
+  postTask: Function
 };
 
 type DispatchType = (args: TaskAction) => TaskAction;
