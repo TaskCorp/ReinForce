@@ -8,6 +8,9 @@ import thunk from "redux-thunk"
 import App from './App';
 import reducer from "./redux/Reducers";
 
+import { PostTask } from './components/AddTask'
+import Task from './components/Task';
+
 const rootElement: HTMLElement | null = document.getElementById('root');
 
 if (!rootElement) throw new Error('Fail to get root element in index.ts');
@@ -22,7 +25,8 @@ const root: Root = createRoot(rootElement);
 
 root.render(
   <Provider store={store}>
-    <App />
+    {/* <App /> */}
+    <PostTask saveTask={Task}/>
   </Provider>
 );
 
