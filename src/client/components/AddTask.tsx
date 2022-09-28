@@ -19,7 +19,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
  
  export const PostTask: React.FC<Props> = ({ saveTask }) => {
      const [task, setTask] = React.useState<NewTask | {}>()
- 
+     const [day, setDay] = React.useState('');
      const handleTaskData = (e: React.FormEvent<HTMLInputElement>) => {
          setTask({
              ...task,
@@ -30,9 +30,6 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
          e.preventDefault()
          saveTask(task)
      }
-     const BasicSelect = () => {
-        const [day, setDay] = React.useState('');
-
      const handleChange = (event: SelectChangeEvent) => {
         setDay(event.target.value as string);
      }
@@ -49,24 +46,25 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
             noValidate
             autoComplete="off"
             >
-        <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-        <InputLabel id="input-label">Days</InputLabel>
+        <TextField id="outlined-basic" label="New Task" variant="outlined" />
+        <TextField id="outlined-basic2" label="Value" variant="outlined" />
+        <InputLabel id="input-label">Time</InputLabel>
         <Select
             labelId="select-label"
             id="select-box"
             value={day}
-            label="Days"
+            label="Time"
             onChange={handleChange}
         >
-            <MenuItem value={7}>Seven</MenuItem>
-            <MenuItem value={14}>Fourteen</MenuItem>
-            <MenuItem value={21}>Twenty One</MenuItem>
+            <MenuItem value={1}>Day(s)</MenuItem>
+            <MenuItem value={7}>Week(s)</MenuItem>
+            <MenuItem value={30}>Month(s)</MenuItem>
+            <MenuItem value={365}>Year(s)</MenuItem>
         </Select>
       </Box>
     </form>
           );
     }
- }
  
 
   //  <form onSubmit={addNewTask} className="Add-task" id="addTask">
