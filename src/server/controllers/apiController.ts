@@ -4,7 +4,7 @@ const db = require('../models/db.ts');
 
 const apiController: any = {};
 
-apiController.getTask = (req: Request, res: Response, next: NextFunction) => {
+apiController.getTasks = (req: Request, res: Response, next: NextFunction) => {
   // const { username } = req.params;
 
   // let queryString =
@@ -21,7 +21,7 @@ apiController.getTask = (req: Request, res: Response, next: NextFunction) => {
     })
     .catch((err: string) =>
       next({
-        log: 'apiController.getTask went wrong',
+        log: 'apiController.getTasks went wrong',
         message: { err: `Error ${JSON.stringify(err)}` },
       })
     );
@@ -33,11 +33,12 @@ apiController.getTask = (req: Request, res: Response, next: NextFunction) => {
 };
 
 apiController.postTask = (req: any, res: Response, next: NextFunction) => {
-  const { username, taskName, startTime, revisit, users_id } = req.body;
+  const { taskName, start_time, revisit_interval, users_id } = req.body;
+  console.log(req.body);
 
   // let queryString =
   //   `INSERT INTO public.tasks ("name", "start_time", "revisit_interval", "users_id") VALUES('${taskName}', ${startTime}, ${revisit}, ${users_id}); SELECT "users_id", "name", "start_time", "revisit_interval" FROM users INNER JOIN tasks on tasks.users_id = users._id WHERE username = '${username}'; `;
-  let queryString = `INSERT INTO public.tasks ("name", "start_time", "revisit_interval", "users_id") VALUES('${taskName}', ${startTime}, ${revisit}, ${users_id}); SELECT * FROM public.tasks ORDER BY _id ASC; `;
+  let queryString = `INSERT INTO public.tasks ("name", "start_time", "revisit_interval", "users_id") VALUES('${taskName}', ${start_time}, ${revisit_interval}, ${users_id}); SELECT * FROM public.tasks ORDER BY _id ASC; `;
 
   db.query(queryString)
     .then((response: any) => {
@@ -61,7 +62,9 @@ apiController.updateTask = (
   next: NextFunction
 ) => {
   // body
-  const { _id, taskName, startTime, revisit } = req.body;
+  const { _id } = req.params;
+  console.log(req.body);
+  const { name, start_time, revisit_interval } = req.body;
   /*
   UPDATE public.tasks
   SET name = 'cooking234',
@@ -70,7 +73,6 @@ apiController.updateTask = (
   WHERE _id = 14;
   */
 
-  // ! users_id ???
   // let queryString =
   //   `UPDATE public.tasks SET name = ${taskName} start_time = ${startTime} revisit_interval = ${revisit}  WHERE _id = ${_id}; SELECT "users_id", "name", "start_time", "revisit_interval" FROM users INNER JOIN tasks on tasks.users_id = users._id WHERE username = '${username}'; `;
   // let queryString =
@@ -81,13 +83,13 @@ UPDATE public.tasks SET name = 'flying6000',
 start_time = 723423, revisit_interval = 12312
 WHERE _id = 14; select * from public.tasks ORDER BY _id ASC;
   */
-  let queryString = `UPDATE public.tasks SET name = '${taskName}', start_time = ${startTime}, revisit_interval = ${revisit} WHERE _id = ${_id}; SELECT * FROM public.tasks ORDER BY _id ASC; `;
-
+  let queryString = `UPDATE public.tasks SET name = '${name}', start_time = ${start_time}, revisit_interval = ${revisit_interval} WHERE _id = ${_id}; `;
+  console.log(queryString);
   db.query(queryString)
     .then((response: any) => {
       // res.locals.tasks = response.rows;
 
-      res.locals.tasks = response[1].rows;
+      // res.locals.tasks = response[1].rows;
       return next();
     })
     .catch((err: string) => {
