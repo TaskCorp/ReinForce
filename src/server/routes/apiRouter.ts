@@ -4,8 +4,8 @@ const apiController = require("../controllers/apiController");
 const router = express.Router();
 
 router.get(
-  "/getTask",
-  apiController.getTask,
+  "/getTasks",
+  apiController.getTasks,
   (req: Request, res: Response) => res.status(200).json(res.locals.tasks),
 );
 
@@ -16,7 +16,7 @@ router.post(
 );
 
 router.patch(
-  "/updateTask",
+  "/updateTask/:_id",
   apiController.updateTask,
   (req: Request, res: Response) => res.status(200).json(res.locals.tasks),
 );

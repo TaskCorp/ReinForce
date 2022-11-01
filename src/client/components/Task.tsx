@@ -6,7 +6,6 @@ import * as styles from './TaskStyles';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CloudSyncIcon from '@mui/icons-material/CloudSync';
 import { IconButton } from '@mui/material';
-import { getTasks } from '../redux/actionCreators';
 
 function Task({
   _id,
@@ -14,36 +13,30 @@ function Task({
   name,
   start_time,
   revisit_interval,
-  getTasks,
-  postTask,
   deleteTask,
   updateTask,
 }: TaskProps) {
   const [newTaskName, setNewTaskName] = useState(name);
-  const [newStartTime, setNewStartTime] = useState(start_time);
 
-  const handleSync = () => {
-    // updateTask(new ReadTask({_id, users_id, }))
-    // try {
+  const handleUpdateTime = async () => {
+    const newDate = String(Date.now());
+    await handleUpdateTask(newDate);
+  }
 
-    updateTask({
-      _id,
-      users_id,
-      name: newTaskName,
-      start_time: newStartTime,
-      revisit_interval,
-    });
-    // } catch (error) {
-    //   console.log(error);
-    // }
-  };
+  const handleUpdateTask = async (newStartTime = start_time) => {
+    
+    const updateOptions = {
+      method: 'PATCH',
+      body: JSON.stringify({ users_id, start_time: newStartTime, name: newTaskName, revisit_interval }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    await fetch(`/api/updateTask/${_id}`, updateOptions);
+    updateTask({ _id, users_id, start_time: newStartTime, name: newTaskName, revisit_interval });
+  }
 
-  const handleTimeUpdate = () => {
-    setNewStartTime(Number(Date.now()));
-    handleSync();
-  };
-
-  const handleDelete = async () => {
+  const handleDeleteTask = async () => {
     try {
       const deleteOptions = {
         method: 'DELETE',
@@ -53,19 +46,6 @@ function Task({
       };
       await fetch(`/api/deleteTask/${_id}`, deleteOptions);
       deleteTask({ _id, users_id, start_time, name, revisit_interval });
-
-      const getOptions = {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      };
-
-      const response = await fetch('/api/getTask', getOptions);
-      const data = await response.json();
-      console.log('DATA!!', data);
-      getTasks(data);
-      location.reload();
     } catch (error) {
       console.log(error);
     }
@@ -77,10 +57,10 @@ function Task({
         sx={{ ...styles.barButton, width: '150px' }}
         variant="outlined"
         color="success"
-        onClick={handleTimeUpdate}
+        onClick={handleUpdateTime}
       >
         {Math.floor((Number(Date.now()) - Number(start_time)) / 86400000)}/
-        {Math.floor(revisit_interval / 86400000)} Days
+        {Math.floor(Number(revisit_interval) / 86400000)} Days
       </Button>
       <TextField
         sx={styles.barText}
@@ -93,12 +73,12 @@ function Task({
         disabled={newTaskName === name}
         sx={{ ...styles.barButton, width: '50px' }}
         color="default"
-        onClick={() => updateTask()}
+        onClick={() => handleUpdateTask()}
       >
         <CloudSyncIcon />
       </IconButton>
       <IconButton
-        onClick={() => handleDelete()}
+        onClick={() => handleDeleteTask()}
         sx={{ ...styles.barButton, width: '50px' }}
         color="error"
       >
@@ -108,42 +88,4 @@ function Task({
   );
 }
 
-/*
-  _id,
-  users_id,
-  name,
-  start_time,
-  revisit_interval,
-*/
-
 export default Task;
-
-// import React, { useState } from "react";
-// import Container from "@mui/material/Container";
-// import Button from "@mui/material/Button";
-// import TextField from "@mui/material/TextField";
-// import * as styles from './TaskStyles';
-// import DeleteIcon from '@mui/icons-material/Delete';
-// import CloudSyncIcon from '@mui/icons-material/CloudSync';
-// import { IconButton } from "@mui/material";
-
-// function Task() {
-
-//   const [taskName, setTaskName] = useState('default');
-//   const [newTaskName, setNewTaskName] = useState(taskName);
-
-//   return (
-// <Container sx={styles.barWrapper} className="barWrapper">
-//   <Button sx={{...styles.barButton, width: '150px'}} variant="outlined" color="success">0/14 Days</Button>
-//   <TextField sx={styles.barText} label="TaskName" variant="outlined" onChange={e => setNewTaskName(e.target.value)} value={newTaskName}/>
-//   <IconButton disabled={newTaskName === taskName} sx={{...styles.barButton, width: '50px'}} color="default">
-//     <CloudSyncIcon/>
-//   </IconButton>
-//   <IconButton sx={{...styles.barButton, width: '50px'}} color="error">
-//     <DeleteIcon/>
-//   </IconButton>
-// </Container>
-//   );
-// }
-
-// export default Task;

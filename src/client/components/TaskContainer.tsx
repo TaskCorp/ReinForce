@@ -24,12 +24,12 @@ function TaskContainer() {
 
   const dispatch: Dispatch<any> = useDispatch();
 
-  const postTask = React.useCallback(
-    (task: ReadTask): any => dispatch(actionCreators.postTask(task)),
-    [dispatch]
-  );
   const getTasks = React.useCallback(
     (tasks: ReadTask[]): any => dispatch(actionCreators.getTasks(tasks)),
+    [dispatch]
+  );
+  const postTask = React.useCallback(
+    (task: ReadTask): any => dispatch(actionCreators.postTask(task)),
     [dispatch]
   );
   const updateTask = React.useCallback(
@@ -53,7 +53,7 @@ function TaskContainer() {
           },
         };
 
-        const response = await fetch('/api/getTask', getOptions);
+        const response = await fetch('/api/getTasks', getOptions);
         const data = await response.json();
 
         // console.log("BEFORE GET TASKS");

@@ -25,11 +25,11 @@ interface NewTask {
 //   revisit: number;
 // }
 interface ReadTask {
-  _id: number;
-  users_id: number;
+  _id: string;
+  users_id: string;
   name: string;
-  start_time: number;
-  revisit_interval: number;
+  start_time: string;
+  revisit_interval: string;
 }
 
 // type ReadTask = string;
@@ -61,15 +61,19 @@ type TasksProps = {
 };
 
 type TaskProps = {
-  _id: number;
-  users_id: number;
+  _id: string;
+  users_id: string;
   name: string;
-  start_time: number;
-  revisit_interval: number;
+  start_time: string;
+  revisit_interval: string;
   getTasks: Function;
   updateTask: Function;
   deleteTask: Function;
   postTask: Function;
 };
+
+type PostTaskProps = {
+  postTask: Function;
+}
 
 type DispatchType = (args: TaskAction) => TaskAction;
