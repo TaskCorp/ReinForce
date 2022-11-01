@@ -4,93 +4,81 @@
  ** (2) - add button that will add the typed in task to the taskList component.
  */
 import * as React from 'react';
-import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import IconButton from '@mui/material/IconButton';
+import AddIcon from '@mui/icons-material/Add';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { IconButton } from '@mui/material';
-import Icon from '@mui/material/Icon';
-import AddIcon from '@mui/icons-material/Add';
-import { green } from '@mui/material/colors';
+import Select from '@mui/material/Select';
+import * as styles from './PostTaskStyles';
 
-type Props = {
-  saveTask: (task: NewTask | any) => void;
-};
+function PostTask ({ postTask }: PostTaskProps) {
 
-export const PostTask: React.FC<Props> = ({ saveTask }) => {
-  const [task, setTask] = React.useState<NewTask | {}>();
-  const [day, setDay] = React.useState('');
-  const handleTaskData = (e: React.FormEvent<HTMLInputElement>) => {
-    setTask({
-      ...task,
-      [e.currentTarget.id]: e.currentTarget.value,
-    });
-  };
-  const addNewTask = (e: React.FormEvent) => {
-    e.preventDefault();
-    saveTask(task);
-  };
+  const [name, setName] = React.useState('');
+  const [time, setTime] = React.useState('');
+  const [interval, setInterval] = React.useState('');
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setDay(event.target.value as string);
-  };
-
-  const handlePost = async () => {
+  // Function to handle post request
+  const handlePostTask = async () => {
     try {
-      // if (!document) return;
-
-      const rootElement: HTMLElement | null =
-        document.getElementById('outlined-basic');
-
-      if (!rootElement) throw new Error('Fail to get root element in index.ts');
-      // const doc = document;
-
-      const name = rootElement.nodeValue;
-
-      console.log('name', name);
-      console.log(rootElement.nodeValue);
-
-      // const name: Element | null = document.querySelector('#outlined-basic').nodeValue;
-      const startTime = Date.now();
-
-      console.log(name);
+      const currDate = String(Date.now());
+      const revisitInterval = String(1000 * 60 * 60 * 24 * (Number(interval) * Number(time)));
+      const postOptions = {
+        method: 'POST',
+        body: JSON.stringify({
+          start_time: currDate,
+          name,
+          revisit_interval: revisitInterval,
+          users_id: 1,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      await fetch(`/api/postTask`, postOptions);
+      postTask({ start_time: currDate, name, revisit_interval: revisitInterval, users_id: 1});
+      setName('');
+      setTime('');
+      setInterval('');
     } catch (error) {
       console.log(error);
     }
-  };
+  }
 
   return (
-    <Box
-      component="form"
-      onSubmit={addNewTask}
+    <Container
       className="Add-task"
       id="addTask"
-      sx={{
-        '& > :not(style)': { m: 1, width: '25ch' },
-        display: 'flex',
-        justifyContent: 'center',
-      }}
-      noValidate
-      autoComplete="off"
+      sx={ styles.barWrapper }
     >
-      <TextField id="outlined-basic" label="New Task" variant="outlined" />
+      <TextField
+        id="outlined-basic"
+        required
+        label="New Task"
+        variant="outlined"
+        value={name}
+        sx={{...styles.barText}}
+        onChange={e => setName(e.target.value)}
+      />
       <TextField
         type="number"
+        required
         id="outlined-basic2"
         label="Select Time"
         variant="outlined"
+        value={time}
+        sx={styles.barText}
+        onChange={e => setTime(e.target.value)}
       />
-      <FormControl fullWidth>
+      <FormControl required fullWidth sx={styles.barText}>
         <InputLabel id="select-label">Date Interval</InputLabel>
         <Select
           labelId="select-label"
-          // id="select-box"
           id="select-label"
-          value={day}
-          label="time"
-          onChange={handleChange}
+          value={interval}
+          onChange={e => setInterval(e.target.value)}
         >
           <MenuItem value={1}>Day(s)</MenuItem>
           <MenuItem value={7}>Week(s)</MenuItem>
@@ -98,27 +86,16 @@ export const PostTask: React.FC<Props> = ({ saveTask }) => {
           <MenuItem value={365}>Year(s)</MenuItem>
         </Select>
       </FormControl>
-      <IconButton onClick={() => handlePost()} color="primary">
+      <IconButton
+        onClick={() => handlePostTask()}
+        color="primary"
+        sx={{ ...styles.barButton, width: '50px' }}
+        disabled={!time || !name || !interval}
+      >
         <AddIcon fontSize="large" />
       </IconButton>
-    </Box>
+    </Container>
   );
 };
 
-//  <form onSubmit={addNewTask} className="Add-task" id="addTask">
-//      <input
-//      type="text"
-//      id="title"
-//      placeholder='TaskName'
-//      onChange={handleTaskData}
-//      />
-//      <input
-//      type="text"
-//      id="title"
-//      placeholder='Interval'
-//      onChange={handleTaskData}
-//      />
-//      <button id="add-button" disabled={ task === undefined ? true : false }>
-//          Add Task
-//      </button>
-//  </form>
+export default PostTask;
