@@ -7,7 +7,7 @@
 
 import React from 'react';
 import Task from './Task';
-import { PostTask } from './PostTask';
+import PostTask from './PostTask';
 
 /*
 "_id" SERIAL NOT NULL,
@@ -64,7 +64,7 @@ function Tasks({
   return (
     <div id="Tasks">
       <div id="PostTask">
-        <PostTask saveTask={Task} />
+        <PostTask postTask={postTask} />
       </div>
       {/* <h1>hello world</h1> */}
       <div id="TaskList">
