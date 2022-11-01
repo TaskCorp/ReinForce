@@ -76,6 +76,7 @@ body {
 
 #PostTask {
   padding: 20px;
+  width: 70vw;
   // background-color: greenyellow;
   // position: absolute;
   // width: 70vw;
@@ -93,12 +94,6 @@ body {
   border-radius: 5px;
 }
 
-#add-button {
-  display: flexbox;
-  padding: 1rem;
-  margin: 0.5rem;
-}
-
 #TaskList {
   display: flex;
   flex-direction: column;
@@ -114,8 +109,4 @@ body {
     // justify-items: center;
     width: 70vw;
   }
-}
-
-#add-button {
-  width: 3rem;
 }
