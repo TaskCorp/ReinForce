@@ -1,3 +1,4 @@
+// Styles for PostTask
 const barWrapper = {
   display: 'flex',
   alignItems: 'center',
