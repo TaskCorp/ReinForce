@@ -1,29 +1,3 @@
-//* When a new task is created it should be this shape.
-interface NewTask {
-  _id?: number;
-  user_id?: number;
-  taskName: string;
-  startTime: number;
-  revisit: number;
-}
-// username name start_time revisit_interval
-/*
-  let queryString =
-    `SELECT "users_id", "name", "start_time", "revisit_interval" FROM users INNER JOIN tasks on tasks.users_id = users._id WHERE username = '${username}'; `;
-
-    SELECT "users_id", "name", "start_time", "revisit_interval"
-    FROM users
-    INNER JOIN tasks on tasks.users_id = users._id
-    WHERE username = 'pleb';
-  */
-//* When we receive a task back from the database, it should be of this shape.
-// interface ReadTask {
-//   _id: number;
-//   user_id: number;
-//   taskName: string;
-//   startTime: number;
-//   revisit: number;
-// }
 interface ReadTask {
   _id: string;
   users_id: string;
@@ -31,10 +5,6 @@ interface ReadTask {
   start_time: string;
   revisit_interval: string;
 }
-
-// type ReadTask = string;
-
-//"users_id", "name", "start_time", "revisit_interval"
 
 //* When we store our tasks in our TaskContainer, it should be an array with all elements having the shape of ReadTask
 type TaskState = {
@@ -52,9 +22,11 @@ type TasksAction = {
   task: ReadTask[];
 };
 
+//* Defining React component props
+
 type TasksProps = {
   tasks: readonly ReadTask[];
-  getTasks: (input: any) => void;
+  handleGetTasks: (input: any) => void;
   postTask: (input: any) => void;
   updateTask: (input: any) => void;
   deleteTask: (input: any) => void;
@@ -66,14 +38,13 @@ type TaskProps = {
   name: string;
   start_time: string;
   revisit_interval: string;
-  getTasks: Function;
   updateTask: Function;
   deleteTask: Function;
-  postTask: Function;
 };
 
 type PostTaskProps = {
   postTask: Function;
+  handleGetTasks: Function;
 }
 
 type DispatchType = (args: TaskAction) => TaskAction;

@@ -7,6 +7,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import CloudSyncIcon from '@mui/icons-material/CloudSync';
 import { IconButton } from '@mui/material';
 
+// The task component is the component used for displaying user tasks
 function Task({
   _id,
   users_id,
@@ -16,6 +17,7 @@ function Task({
   deleteTask,
   updateTask,
 }: TaskProps) {
+  // State to hold current task name
   const [newTaskName, setNewTaskName] = useState(name);
 
   const handleUpdateTime = async () => {
@@ -47,16 +49,29 @@ function Task({
       await fetch(`/api/deleteTask/${_id}`, deleteOptions);
       deleteTask({ _id, users_id, start_time, name, revisit_interval });
     } catch (error) {
-      console.log(error);
+      console.log('DeleteTask Error: ', error);
     }
   };
+
+  // Returns necessary color of box
+  function boxColor() {
+    const dateFrac = (Number(Date.now()) - Number(start_time)) / Number(revisit_interval);
+    if (dateFrac >= 1) return "error";
+    if (dateFrac >= .5) return "warning";
+    else return "success";
+  }
+
+  // If name state value doesn't match new task name when it updates, newTaskName is updated.
+  React.useEffect(() => {
+    if (name != newTaskName) setNewTaskName(name);
+  }, [name]);
 
   return (
     <Container sx={styles.barWrapper} className="barWrapper">
       <Button
         sx={{ ...styles.barButton, width: '150px' }}
         variant="outlined"
-        color="success"
+        color={boxColor()}
         onClick={handleUpdateTime}
       >
         {Math.floor((Number(Date.now()) - Number(start_time)) / 86400000)}/

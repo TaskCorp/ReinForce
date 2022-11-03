@@ -1,5 +1,5 @@
 /**
- ** The addTask component will house the following
+ ** The postTask component will house the following
  ** (1) - Box to enter description of task and a interval they can select from
  ** (2) - add button that will add the typed in task to the taskList component.
  */
@@ -14,7 +14,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import * as styles from './PostTaskStyles';
 
-function PostTask ({ postTask }: PostTaskProps) {
+function PostTask ({ postTask, handleGetTasks }: PostTaskProps) {
 
   const [name, setName] = React.useState('');
   const [time, setTime] = React.useState('');
@@ -42,8 +42,9 @@ function PostTask ({ postTask }: PostTaskProps) {
       setName('');
       setTime('');
       setInterval('');
+      handleGetTasks();
     } catch (error) {
-      console.log(error);
+      console.log('PostTask Error: ', error);
     }
   }
 
