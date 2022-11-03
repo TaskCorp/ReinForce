@@ -1,3 +1,4 @@
+// Styles for Task
 const barWrapper = {
   display: 'flex',
   alignItems: 'center',

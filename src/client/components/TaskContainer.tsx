@@ -20,8 +20,6 @@ function TaskContainer() {
     shallowEqual
   );
 
-  // console.log("TASKS IN REACT", tasks);
-
   const dispatch: Dispatch<any> = useDispatch();
 
   const getTasks = React.useCallback(
@@ -41,31 +39,27 @@ function TaskContainer() {
     [dispatch]
   );
 
-  React.useEffect(() => {
-    // fetch()
-    async function helper() {
-      // console.log("INSIDE HELPER");
-      try {
-        const getOptions = {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        };
+  const handleGetTasks = async () => {
+    try {
+      const getOptions = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
 
-        const response = await fetch('/api/getTasks', getOptions);
-        const data = await response.json();
+      const response = await fetch('/api/getTasks', getOptions);
+      const data = await response.json();
 
-        // console.log("BEFORE GET TASKS");
-        getTasks(data);
-
-        // console.log("TASKS AFTER USE EFFECT", tasks);
-      } catch (err) {
-        console.log('getTasks error');
-      }
+      getTasks(data);
+    } catch (err) {
+      console.log('GetTasks Error', err);
     }
-    helper();
-    // invoke getTasks dispatch
+  }
+
+  // Gets tasks when page loads
+  React.useEffect(() => {
+    handleGetTasks();
   }, []);
 
   return (
@@ -76,7 +70,7 @@ function TaskContainer() {
         postTask={postTask}
         updateTask={updateTask}
         deleteTask={deleteTask}
-        getTasks={getTasks}
+        handleGetTasks={handleGetTasks}
       />
       <Footer />
     </div>
